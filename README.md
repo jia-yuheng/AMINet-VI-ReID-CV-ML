@@ -5,14 +5,30 @@ Visible-Infrared Person Re-Identification (VI-ReID) with the proposed Adaptive M
 
 Visible-Infrared Person Re-Identification (VI-ReID) suffers from severe modality discrepancies between RGB and infrared images, along with challenges such as illumination variation and occlusion.
 
+
+
+<div style="width: 90%; margin: 0 auto; text-align: justify;">
+
+<p align="center">
+  <img src="assets/Framework_reid.jpg" style="width:100%;">
+</p>
+
+<b>Figure 1.</b> Overview of the proposed HMG-DBNet framework. The model adopts a dual-stream architecture to extract full-body and part-level features. IFFS performs intra- and cross-modality feature fusion to enhance RGB-IR alignment. PESAM introduces phase congruency and edge-guided attention for illumination-invariant structural representation. AMK-MMD further reduces cross-modal distribution discrepancy through adaptive multi-scale kernel alignment. The entire network is jointly optimized using ID loss, Triplet loss, and MMD loss for robust cross-modality person re-identification.
+
+</div>
+
+
+
 We propose **AMINet (Adaptive Modality Interaction Network)**, which improves cross-modal feature alignment through:
 
-- **Multi-granularity feature extraction** (full-body + upper-body)
+- **Hierarchical Multi-Granular Dual-Branch Network (HMG-DBNet)** Multi-granularity feature extraction(full-body + upper-body)
 - **Interactive Feature Fusion Strategy (IFFS)** for intra- and cross-modality alignment
 - **Phase-Enhanced Structural Attention Module (PESAM)** for illumination-invariant feature learning
 - **Adaptive Multi-Scale Kernel MMD (AMK-MMD)** for robust distribution alignment
 
 On SYSU-MM01, AMINet achieves **74.75% Rank-1 accuracy**, outperforming the baseline by **+7.93%** and previous SOTA by **+3.95%**.
+
+
 
 ## Method
 
@@ -43,3 +59,262 @@ We propose a hierarchical dual-branch framework for cross-modality feature learn
 - Interactive Feature Fusion Strategy (IFFS) for joint intra- and cross-modality alignment
 - Phase-based structural attention (PESAM) for illumination-invariant representation
 - Adaptive multi-scale MMD (AMK-MMD) for flexible and scalable feature alignment
+
+
+
+
+
+
+# 4. Experiments
+
+---
+
+## 4.1 Experimental Setups
+
+We evaluate the proposed method on two standard VI-ReID benchmarks: **SYSU-MM01** and **RegDB**, using **CMC, mAP, and mINP** as evaluation metrics.
+
+### 📌 Datasets
+
+- **SYSU-MM01**: 491 identities from 6 cameras (4 RGB + 2 IR). Evaluation includes all-search and indoor-search settings.
+- **RegDB**: 412 identities with RGB-IR pairs, evaluated under both Visible→Thermal and Thermal→Visible modes.
+
+### ⚙️ Implementation Details
+
+The model is implemented in PyTorch and trained on RTX 4090 GPU.
+
+- Input size:
+  - Global branch: 388 × 144  
+  - Part branch: 194 × 144  
+
+- Training settings:
+  - Epochs: 80  
+  - Batch size: 64  
+  - Optimizer: SGD (momentum 0.9, weight decay 5e-4)  
+  - Learning rate: staged schedule (0.01 → 0.1 → 0.001)
+
+---
+
+## 4.2 Ablation Study
+
+We conduct ablation studies to evaluate the effectiveness of each component, including:
+
+- Upper Body Feature Extraction (UBF)
+- Intra-Modality Distribution Alignment (IMDAL)
+- Inter-Modality Distribution Alignment (IDAL)
+
+---
+
+### Ablation Results
+
+<p align="center">
+  <img src="assets/ablation_table.jpg" width="85%">
+</p>
+
+<p align="center">
+<b>Table 1.</b> Ablation study on SYSU-MM01 and RegDB datasets.
+</p>
+
+---
+
+### 🔹 Effect of Upper Body Feature Extraction (UBF)
+
+<p align="center">
+  <img src="assets/ubf_curve.jpg" width="80%">
+</p>
+
+UBF significantly improves performance by capturing fine-grained upper-body cues such as head, shoulders, and torso, improving robustness under occlusion and pose variation.
+
+---
+
+### 🔹 Effect of IMDAL / IDAL
+
+<p align="center">
+  <img src="assets/mmd_loss_curve.jpg" width="80%">
+</p>
+
+IMDAL reduces intra-modality distribution variance, while IDAL aligns cross-modality distributions, improving feature consistency and generalization.
+
+---
+
+## 4.3 Effect of Loss Weights
+
+---
+
+<p align="center">
+  <img src="assets/loss_weight.jpg" width="80%">
+</p>
+
+The optimal MMD weighting differs across datasets:
+
+- SYSU-MM01: best at (0.4 intra / 0.6 inter)
+- RegDB: best at stronger inter-modality alignment (0.8)
+
+This reflects different modality gaps between datasets.
+
+---
+
+## 4.4 Effect of Upper-Body Proportion
+
+---
+
+<p align="center">
+  <img src="assets/upper_body_ratio.jpg" width="80%">
+</p>
+
+Performance peaks at:
+- SYSU-MM01: 50% upper-body ratio
+- RegDB: 60% upper-body ratio
+
+Excessive upper-body information introduces redundancy and weakens global identity representation.
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Multi-Granular Feature Extraction
+
+HMG-DBNet adopts a dual-branch architecture to process **full-body** and **half-body** images from both RGB and IR modalities.
+
+- The **global branch** captures high-level semantic information (e.g., body shape and overall appearance)
+- The **part branch** focuses on fine-grained local details (e.g., clothing texture and upper-body structure)
+
+These features are hierarchically fused to form a unified identity representation, followed by **Generalized Mean Pooling (GeM)** for compact and robust embedding.
+
+**Training Objectives:**
+- Identity Loss
+- Triplet Loss
+- MMD Loss (for cross-modality alignment)
+
+
+
+
+
+
+
+
+
+### Interactive Feature Fusion Strategy (IFFS)
+
+IFFS enhances feature representation by combining:
+
+#### 1. Intra-Modality Fusion
+- Fuses **global and part-based features within each modality**
+- Improves discriminative capability by integrating:
+  - global structure
+  - local identity cues
+
+#### 2. Cross-Modality Fusion
+- Aligns RGB and IR features by **cross-granularity interaction**
+- Combines:
+  - RGB global features with IR local features
+  - IR global features with RGB local features
+
+This design leverages complementary information across modalities, effectively reducing the RGB-IR feature gap and improving generalization.
+
+
+
+
+
+
+
+
+### Interactive Feature Fusion Strategy (IFFS)
+
+IFFS enhances feature representation by combining:
+
+#### 1. Intra-Modality Fusion
+- Fuses **global and part-based features within each modality**
+- Improves discriminative capability by integrating:
+  - global structure
+  - local identity cues
+
+#### 2. Cross-Modality Fusion
+- Aligns RGB and IR features by **cross-granularity interaction**
+- Combines:
+  - RGB global features with IR local features
+  - IR global features with RGB local features
+
+This design leverages complementary information across modalities, effectively reducing the RGB-IR feature gap and improving generalization.
+
+
+
+
+
+
+
+### Adaptive Multi-Scale Kernel MMD (AMK-MMD)
+
+To address complex distribution discrepancies between RGB and IR features, we extend traditional MMD with:
+
+- **Multi-scale Gaussian kernels**
+- **Adaptive bandwidth selection**
+- **Learnable kernel weights**
+
+This allows the model to capture both coarse and fine-grained distribution differences across modalities.
+
+Efficient implementation using **batch processing and vectorized computation** ensures scalability for large datasets.
+
+
+
+
+
+
+
+
+### Phase-Enhanced Structural Attention Module (PESAM)
+
+PESAM introduces **phase congruency** to extract illumination-invariant structural features across RGB and IR images.
+
+- Captures stable features such as **edges and contours**
+- Robust to lighting and contrast variations
+
+An **Edge-Guided Attention Mechanism (EGAM)** further enhances feature learning by focusing on structurally important regions.
+
+An adaptive weighting scheme combines:
+- RGB features
+- IR features
+- Phase-based structural features
+
+to produce a balanced and robust final representation.
+
+
+
+
+
+
+
+
+
+
+
+
