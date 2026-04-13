@@ -120,17 +120,6 @@ clusion and varying illumination.
 
 </div>
 
-### Ablation Results
-
-<p align="center">
-  <img src="assets/ablation_table.jpg" width="85%">
-</p>
-
-<p align="center">
-<b>Table 1.</b> Ablation study on SYSU-MM01 and RegDB datasets.
-</p>
-
----
 
 ### 🔹 Effect of Upper Body Feature Extraction (UBF)
 
@@ -144,12 +133,18 @@ IMDAL reduces intra-modality distribution variance, while IDAL aligns cross-moda
 
 ---
 
+
+
+
+
+
+
 ## 4.3 Effect of Loss Weights
 
 <div style="width: 90%; margin: 0 auto; text-align: justify;">
 
 <p align="center">
-  <img src="assets/Impact of Upper Body Proportion.png" style="width:70%;">
+  <img src="assets/different Intra and Inter weights.png" style="width:55%;">
 </p>
 
 <b>Table 2.</b> Results with different intra-modality and inter-modality loss weights on SYSU-MM01 and RegDB datasets. The optimal weight setting varies across datasets due to different modality gaps: SYSU requires a balanced setting (0.4 / 0.6), while RegDB benefits from stronger inter-modality alignment (0.8).
@@ -157,21 +152,28 @@ IMDAL reduces intra-modality distribution variance, while IDAL aligns cross-moda
 </div>
 
 
+
+
+
+
 ## 4.4 Effect of Upper-Body Proportion
 
----
+<div style="width: 90%; margin: 0 auto; text-align: justify;">
 
 <p align="center">
-  <img src="assets/upper_body_ratio.jpg" width="80%">
+  <img src="assets/Impact of Upper Body Proportion.png" style="width:60%;">
 </p>
 
-Performance peaks at:
-- SYSU-MM01: 50% upper-body ratio
-- RegDB: 60% upper-body ratio
+<b>Figure 2.</b> Impact of Upper Body Proportion (UBP) on model accuracy for SYSU-MM01 (left) and RegDB (right) datasets.  
 
-Excessive upper-body information introduces redundancy and weakens global identity representation.
+As shown in Fig. 2, experiments on SYSU-MM01 and RegDB datasets systematically evaluate the effect of upper-body data proportion on cross-modality person re-identification performance. The results demonstrate a strong correlation between upper-body proportion and recognition accuracy. On SYSU-MM01, peak performance (74.15%) is achieved at 50% upper-body input, while RegDB reaches its highest accuracy (91.29%) at 60%.
 
----
+This indicates an optimal operating range of approximately 50%–60%, where discriminative local cues such as shoulders and torso effectively complement global full-body representations, improving RGB-IR alignment. Notably, SYSU-MM01 performance decreases beyond 50%, suggesting redundancy introduced by excessive upper-body emphasis, which weakens global structural information. In contrast, RegDB remains stable at 60%, benefiting from more consistent imaging conditions.
+
+These results highlight the importance of a balanced upper-body proportion for robust feature alignment and improved cross-modality identification performance.
+
+</div>
+
 
 
 
