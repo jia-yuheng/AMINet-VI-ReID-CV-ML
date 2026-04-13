@@ -108,7 +108,34 @@ The results in Fig. 2 show that cross-modality Re-ID performance is highly sensi
 
 
 
-## 4.5. State-of-the-Art Performance Comparison
+
+
+
+## 4.5 Performance Trends on SYSU-MM01 and RegDB
+<div style="width: 90%; margin: 0 auto; text-align: justify;">
+
+<p align="center">
+  <img src="assets/Rank-1 and mAP results on SYSU and RegDB_new.png" style="width:110%;">
+</p>
+
+<b>Figure 3.</b> Rank-1 and mAP results on SYSU-MM01 and RegDB datasets.
+
+<br><br>
+
+<b>Conclusion.</b> The proposed AMINet consistently achieves superior Rank-1 and mAP performance on both SYSU-MM01 and RegDB datasets, demonstrating strong cross-modality retrieval capability and robust generalization across different evaluation settings.
+
+</div>
+
+
+
+
+
+
+
+
+
+
+## 4.6 State-of-the-Art Performance Comparison
 
 ### Evaluation on SYSU-MM01. 
 
@@ -143,7 +170,7 @@ The results in Fig. 2 show that cross-modality Re-ID performance is highly sensi
 
 
 
-## 4.6. t-SNE Visualizations & Feature Distance Distributions
+## 4.7 t-SNE Visualizations & Feature Distance Distributions
 <div style="width: 90%; margin: 0 auto; text-align: justify;">
 
 <p align="center">
