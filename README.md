@@ -121,20 +121,6 @@ clusion and varying illumination.
 </div>
 
 
-### 🔹 Effect of Upper Body Feature Extraction (UBF)
-
-UBF significantly improves performance by capturing fine-grained upper-body cues such as head, shoulders, and torso, improving robustness under occlusion and pose variation.
-
----
-
-### 🔹 Effect of IMDAL / IDAL
-
-IMDAL reduces intra-modality distribution variance, while IDAL aligns cross-modality distributions, improving feature consistency and generalization.
-
----
-
-
-
 
 
 
@@ -166,11 +152,7 @@ IMDAL reduces intra-modality distribution variance, while IDAL aligns cross-moda
 
 <b>Figure 2.</b> Impact of Upper Body Proportion (UBP) on model accuracy for SYSU-MM01 (left) and RegDB (right) datasets.  
 
-As shown in Fig. 2, experiments on SYSU-MM01 and RegDB datasets systematically evaluate the effect of upper-body data proportion on cross-modality person re-identification performance. The results demonstrate a strong correlation between upper-body proportion and recognition accuracy. On SYSU-MM01, peak performance (74.15%) is achieved at 50% upper-body input, while RegDB reaches its highest accuracy (91.29%) at 60%.
-
-This indicates an optimal operating range of approximately 50%–60%, where discriminative local cues such as shoulders and torso effectively complement global full-body representations, improving RGB-IR alignment. Notably, SYSU-MM01 performance decreases beyond 50%, suggesting redundancy introduced by excessive upper-body emphasis, which weakens global structural information. In contrast, RegDB remains stable at 60%, benefiting from more consistent imaging conditions.
-
-These results highlight the importance of a balanced upper-body proportion for robust feature alignment and improved cross-modality identification performance.
+The results in Fig. 2 show that cross-modality Re-ID performance is highly sensitive to the proportion of upper-body input. Optimal accuracy is achieved at 50% on SYSU-MM01 (74.15%) and 60% on RegDB (91.29%). Overall, a balanced range of 50%–60% provides the best trade-off, where discriminative local cues (e.g., shoulders and torso) effectively complement global full-body representations, improving RGB-IR alignment and overall robustness.
 
 </div>
 
