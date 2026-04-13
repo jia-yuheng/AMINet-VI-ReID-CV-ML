@@ -96,13 +96,15 @@ The model is implemented in PyTorch and trained on RTX 4090 GPU.
 
 ## 4.2 Ablation Study
 
-We conduct ablation studies to evaluate the effectiveness of each component, including:
+<div style="width: 90%; margin: 0 auto; text-align: justify;">
 
-- Upper Body Feature Extraction (UBF)
-- Intra-Modality Distribution Alignment (IMDAL)
-- Inter-Modality Distribution Alignment (IDAL)
+<p align="center">
+  <img src="assets/Ablation_study.jpg" style="width:100%;">
+</p>
 
----
+<b>Table 1.</b> Ablation study results showing the impact of different components (UBF, IMDAL, and IDAL) on Rank-1 accuracy (R-1), mean Average Precision (mAP), and mean Inverse Negative Penalty (mINP) across SYSU-MM01 and RegDB datasets.
+
+</div>
 
 ### Ablation Results
 
