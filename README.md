@@ -1,7 +1,7 @@
 
 # Visible-Infrared Person Re-Identification (VI-ReID)
 
-Visible-Infrared Person Re-Identification (VI-ReID) with the proposed **Adaptive Modality Interaction Network (AMINet)**. It mitigates modality gap, illumination changes, and occlusion via hierarchical feature learning and cross-modal alignment. It achieves **74.75% Rank-1 on SYSU-MM01**, outperforming baseline by **7.93%** and state-of-the-art by **3.95%**.
+Visible-Infrared Person Re-Identification (VI-ReID) with the proposed **Interaction-Enhanced Representation Network (IERNet)**. It mitigates modality gap, illumination changes, and occlusion via hierarchical feature learning and cross-modal alignment. It achieves **74.75% Rank-1 on SYSU-MM01**, outperforming baseline by **7.93%** and state-of-the-art by **3.95%**.
 
 
 
@@ -21,14 +21,14 @@ Visible-Infrared Person Re-Identification (VI-ReID) with the proposed **Adaptive
 
 Visible-Infrared Person Re-Identification (VI-ReID) suffers from severe modality discrepancies between RGB and infrared images, along with challenges such as illumination variation and occlusion.
 
-We propose **AMINet (Adaptive Modality Interaction Network)**, which improves cross-modal feature alignment through:
+We propose **IERNet (Interaction-Enhanced Representation Network)**, which improves cross-modal feature alignment through:
 
 * **Hierarchical Multi-Granular Dual-Branch Network (HMG-DBNet)**: multi-granularity feature extraction (full-body + upper-body)
 * **Interactive Feature Fusion Strategy (IFFS)**: intra- and cross-modality feature interaction
 * **Phase-Enhanced Structural Attention Module (PESAM)**: illumination-invariant structural representation
 * **Adaptive Multi-Scale Kernel MMD (AMK-MMD)**: distribution-level alignment across modalities
 
-On SYSU-MM01, AMINet achieves **74.75% Rank-1 accuracy**, outperforming the baseline by **+7.93%** and previous SOTA by **+3.95%**.
+On SYSU-MM01, IERNet achieves **74.75% Rank-1 accuracy**, outperforming the baseline by **+7.93%** and previous SOTA by **+3.95%**.
 
 
 
@@ -48,7 +48,7 @@ On SYSU-MM01, AMINet achieves **74.75% Rank-1 accuracy**, outperforming the base
 
 </div>
 
-**Conclusion.** Each module contributes progressively. Full AMINet achieves best performance, confirming complementary effects.
+**Conclusion.** Each module contributes progressively. Full IERNet achieves best performance, confirming complementary effects.
 
 
 ## Performance Trends
@@ -63,7 +63,7 @@ On SYSU-MM01, AMINet achieves **74.75% Rank-1 accuracy**, outperforming the base
 
 </div>
 
-**Conclusion.** AMINet shows stable and consistent improvement across datasets, demonstrating robust optimization and generalization.
+**Conclusion.** IERNet shows stable and consistent improvement across datasets, demonstrating robust optimization and generalization.
 
 
 
@@ -81,7 +81,7 @@ On SYSU-MM01, AMINet achieves **74.75% Rank-1 accuracy**, outperforming the base
 
 </div>
 
-**Conclusion.** AMINet achieves **74.75% Rank-1** and **66.11% mAP (All Search)**, and **79.18% Rank-1 (Indoor Search)**, outperforming existing methods.
+**Conclusion.** IERNet achieves **74.75% Rank-1** and **66.11% mAP (All Search)**, and **79.18% Rank-1 (Indoor Search)**, outperforming existing methods.
 
 
 ### RegDB
@@ -96,7 +96,7 @@ On SYSU-MM01, AMINet achieves **74.75% Rank-1 accuracy**, outperforming the base
 
 </div>
 
-**Conclusion.** AMINet achieves **89.51% (T→V)** and **91.29% (V→T)** Rank-1 accuracy, demonstrating strong cross-modality alignment.
+**Conclusion.** IERNet achieves **89.51% (T→V)** and **91.29% (V→T)** Rank-1 accuracy, demonstrating strong cross-modality alignment.
 
 
 
@@ -115,11 +115,11 @@ On SYSU-MM01, AMINet achieves **74.75% Rank-1 accuracy**, outperforming the base
 
 ### t-SNE Visualization
 
-Initial model shows severe RGB-IR misalignment. Baseline improves clustering. AMINet achieves compact and aligned identity clusters across modalities.
+Initial model shows severe RGB-IR misalignment. Baseline improves clustering. IERNet achieves compact and aligned identity clusters across modalities.
 
 ### Feature Distance Distribution
 
-Initial model shows overlap with margin **0.26**. Baseline improves separation. AMINet achieves margin **0.56**, showing strong intra-class compactness and inter-class separability.
+Initial model shows overlap with margin **0.26**. Baseline improves separation. IERNet achieves margin **0.56**, showing strong intra-class compactness and inter-class separability.
 
 
 ## Retrieval Visualization Results
@@ -132,7 +132,7 @@ Initial model shows overlap with margin **0.26**. Baseline improves separation. 
 
 <b>Figure.</b> This figure presents eight (two sets) randomly selected query instances from the SYSU-MM01 dataset, along with their corresponding top ten (Rank-10) retrieval results. The retrieval results are illustrated under two distinct query modalities: visible-to-infrared and infrared-to-visible. Correct matches are indicated by green bounding boxes, while incorrect matches are highlighted in red bounding boxes. The ID and the predicted similarity scores are shown above each image pair.
 
-<b>Conclusion.</b> The retrieval visualization demonstrates that AMINet produces highly accurate cross-modality matching results under both query directions. Most top-ranked results correspond to correct identities, indicating strong RGB–IR alignment and robust identity discrimination capability, even under challenging modality variations.
+<b>Conclusion.</b> The retrieval visualization demonstrates that IERNet produces highly accurate cross-modality matching results under both query directions. Most top-ranked results correspond to correct identities, indicating strong RGB–IR alignment and robust identity discrimination capability, even under challenging modality variations.
 
 
 
@@ -180,7 +180,7 @@ Initial model shows overlap with margin **0.26**. Baseline improves separation. 
 
 ## Experimental Setups
 
-We evaluate AMINet on two VI-ReID benchmarks: **SYSU-MM01** and **RegDB**, using **CMC, mAP, and mINP** metrics.
+We evaluate IERNet on two VI-ReID benchmarks: **SYSU-MM01** and **RegDB**, using **CMC, mAP, and mINP** metrics.
 
 ### Datasets
 
